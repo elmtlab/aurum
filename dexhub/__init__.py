@@ -1,5 +1,5 @@
 name = "dex"
 
-from dex.dex import(
-    Connector
+from dexhub.dex import(
+    UniswapV2
 )
