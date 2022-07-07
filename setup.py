@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="dexhub",
-    version="0.0.3",
+    version="0.0.4",
     author="elmtlab",
     author_email="elmtlab@outlook.com",
     description="dex connector",

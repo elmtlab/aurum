@@ -144,7 +144,7 @@ class UniswapV2:
         return self.factory_contract.functions.allPairsLength().call()
 
     def get_pair(self,_token0_address,_token1_address):
-        return self.factory_contract.functions.getPair(_token0_address,_token1_address)
+        return self.factory_contract.functions.getPair(_token0_address,_token1_address).call()
 
     def get_pair_by_index(self,_index):
         all_pairs_length = self.factory_contract.functions.allPairsLength().call()
