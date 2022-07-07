@@ -146,17 +146,18 @@ class UniswapV2:
     def get_pair(self,_token0_address,_token1_address):
         return self.factory_contract.functions.getPair(_token0_address,_token1_address)
 
-    def get_all_pairs(self,_length):
+    def get_pair_by_index(self,_index):
+        all_pairs_length = self.factory_contract.functions.allPairsLength().call()
+        index=_index if _index<all_pairs_length else all_pairs_length
+        return self.factory_contract.functions.allPairs(index).call()
+
+    def get_first_length_pairs(self,_length):
         all_pairs_length = self.factory_contract.functions.allPairsLength().call()
         length=_length if _length<all_pairs_length else all_pairs_length
         result=[]
         for i in range(0, length):
             all_pairs_address = self.factory_contract.functions.allPairs(i).call()
-            contract = self.web3.eth.contract(address=all_pairs_address, abi=self.pair_abi)
-            symbol = contract.functions.symbol().call()
-            supply = contract.functions.totalSupply().call()
-            result.append({symbol,all_pairs_address,supply})
-            # print(symbol,all_pairs_address, supply)
+            result.append(all_pairs_address)
         return result
 
     ###UniswapV2Pair###
