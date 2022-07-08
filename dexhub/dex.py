@@ -108,21 +108,6 @@ class UniswapV2:
     def swapETHForExactTokens():
         return
 
-    def quote():
-        return
-
-    def getAmountOut():
-        return
-
-    def getAmountIn():
-        return
-
-    def getAmountsOut():
-        return
-
-    def getAmountsIn():
-        return
-
     ###IUniswapV2Router02###
 
     ###IUniswapV2Router02-LIBRARY FUNCTIONS
