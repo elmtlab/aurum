@@ -86,7 +86,7 @@ class UniswapV2:
 
     def swapTokensForExactTokens(self,_amount_in_max,_amount_out,_path,_to,_deadline):
         self.nonce=self.web3.eth.get_transaction_count(self.my_public_address)
-        swapFunction=self.route_contract.functions.swapExactTokensForTokens(_amount_in_max, _amount_out, _path, _to, _deadline)
+        swapFunction=self.route_contract.functions.swapTokensForExactTokens(_amount_in_max, _amount_out, _path, _to, _deadline)
         params={
             'from': self.my_public_key,
             'value': 0,
@@ -125,6 +125,21 @@ class UniswapV2:
 
     ###IUniswapV2Router02###
 
+    ###IUniswapV2Router02-LIBRARY FUNCTIONS
+    def quote(self,_amount0,_reserve0,_reserve1):
+        return self.route_contract.functions.quote(_amount0,_reserve0,_reserve1).call()
+
+    def getAmountOut(self,_amount_in,_reserve_in,_reserve_out):
+        return self.route_contract.functions.getAmountOut(_amount_in,_reserve_in,_reserve_out).call()
+
+    def getAmountIn(self,_amount_out,_reserve_in,_reserve_out):
+        return self.route_contract.functions.getAmountIn(_amount_out,_reserve_in,_reserve_out).call()
+
+    def getAmountsOut(self,_amount_in,_path):
+        return self.route_contract.functions.getAmountsOut(_amount_in,_path).call()
+
+    def getAmountsIn(self,_amount_out,_path):
+        return self.route_contract.functions.getAmountsIn(_amount_out,_path).call()
 
     ###UniswapV2ERC20###
 
@@ -168,13 +183,13 @@ class UniswapV2:
         reserve0,reserve1,blockTimeStamp=pairContract.functions.getReserves().call()
         token0_contract=self.web3.eth.contract(address=token0Address, abi=self.erc20_abi)
         token1_contract=self.web3.eth.contract(address=token1Address, abi=self.erc20_abi)
-        token0_name=token0_contract.functions.name().call()
-        token1_name=token1_contract.functions.name().call()
+        # token0_name=token0_contract.functions.name().call()
+        # token1_name=token1_contract.functions.name().call()
         price0=reserve1/reserve0
         price1=reserve0/reserve1
-        print("token0:",str(token0Address),"--name:",str(token0_name),"--price:",str(price0))
-        print("token1:",str(token1Address),"--name:",str(token1_name),"--price:",str(price1))
-        print("reserve0",str(reserve0))
-        print("reserve1",str(reserve1))
-        print("blockTimeStamp",str(blockTimeStamp))
+        # print("token0:",str(token0Address),"--name:",str(token0_name),"--price:",str(price0))
+        # print("token1:",str(token1Address),"--name:",str(token1_name),"--price:",str(price1))
+        # print("reserve0",str(reserve0))
+        # print("reserve1",str(reserve1))
+        # print("blockTimeStamp",str(blockTimeStamp))
         return token0Address,reserve0,token1Address,reserve1,blockTimeStamp,price0,price1
