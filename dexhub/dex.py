@@ -84,9 +84,9 @@ class UniswapV2:
         response = self.sendTransaction(swapFunction,params,self.my_private_key)
         return self.web3.toHex(response)
 
-    def swapTokensForExactTokens(self,_amount_in_max,_amount_out,_path,_to,_deadline):
+    def swapTokensForExactTokens(self,_amount_out,_amount_in_max,_path,_to,_deadline):
         self.nonce=self.web3.eth.get_transaction_count(self.my_public_address)
-        swapFunction=self.route_contract.functions.swapTokensForExactTokens(_amount_in_max, _amount_out, _path, _to, _deadline)
+        swapFunction=self.route_contract.functions.swapTokensForExactTokens(_amount_out,_amount_in_max, _path, _to, _deadline)
         params={
             'from': self.my_public_key,
             'value': 0,
@@ -96,17 +96,53 @@ class UniswapV2:
         response = self._sendTransaction(swapFunction,params,self.my_private_key)
         return self.web3.toHex(response)
 
-    def swapExactETHForTokens():
-        return
+    def swapExactETHForTokens(self,_amount_out_min,_path,_to,_deadline):
+        self.nonce=self.web3.eth.get_transaction_count(self.my_public_address)
+        swapFunction=self.route_contract.functions.swapExactETHForTokens(_amount_out_min, _path, _to, _deadline)
+        params={
+            'from': self.my_public_key,
+            'value': 0,
+            'nonce': self.nonce,
+            'type': '0x2'
+        }
+        response = self._sendTransaction(swapFunction,params,self.my_private_key)
+        return self.web3.toHex(response)
 
-    def swapTokensForExactETH():
-        return
+    def swapTokensForExactETH(self,_amount_out,_amount_in_max,_path,_to,_deadline):
+        self.nonce=self.web3.eth.get_transaction_count(self.my_public_address)
+        swapFunction=self.route_contract.functions.swapTokensForExactETH(_amount_out,_amount_in_max, _path, _to, _deadline)
+        params={
+            'from': self.my_public_key,
+            'value': 0,
+            'nonce': self.nonce,
+            'type': '0x2'
+        }
+        response = self._sendTransaction(swapFunction,params,self.my_private_key)
+        return self.web3.toHex(response)
 
-    def swapExactTokensForETH():
-        return
+    def swapExactTokensForETH(self,_amount_in,_amount_out_min,_path,_to,_deadline):
+        self.nonce=self.web3.eth.get_transaction_count(self.my_public_address)
+        swapFunction=self.route_contract.functions.swapExactTokensForETH(_amount_in,_amount_out_min, _path, _to, _deadline)
+        params={
+            'from': self.my_public_key,
+            'value': 0,
+            'nonce': self.nonce,
+            'type': '0x2'
+        }
+        response = self._sendTransaction(swapFunction,params,self.my_private_key)
+        return self.web3.toHex(response)
 
-    def swapETHForExactTokens():
-        return
+    def swapETHForExactTokens(self,_amount_out,_path,_to,_deadline):
+        self.nonce=self.web3.eth.get_transaction_count(self.my_public_address)
+        swapFunction=self.route_contract.functions.swapETHForExactTokens(_amount_out, _path, _to, _deadline)
+        params={
+            'from': self.my_public_key,
+            'value': 0,
+            'nonce': self.nonce,
+            'type': '0x2'
+        }
+        response = self._sendTransaction(swapFunction,params,self.my_private_key)
+        return self.web3.toHex(response)
 
     ###IUniswapV2Router02###
 
@@ -166,8 +202,8 @@ class UniswapV2:
         token0Address=pairContract.functions.token0().call()
         token1Address=pairContract.functions.token1().call()
         reserve0,reserve1,blockTimeStamp=pairContract.functions.getReserves().call()
-        token0_contract=self.web3.eth.contract(address=token0Address, abi=self.erc20_abi)
-        token1_contract=self.web3.eth.contract(address=token1Address, abi=self.erc20_abi)
+        # token0_contract=self.web3.eth.contract(address=token0Address, abi=self.erc20_abi)
+        # token1_contract=self.web3.eth.contract(address=token1Address, abi=self.erc20_abi)
         # token0_name=token0_contract.functions.name().call()
         # token1_name=token1_contract.functions.name().call()
         price0=reserve1/reserve0
