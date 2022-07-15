@@ -164,6 +164,14 @@ class UniswapV2:
 
     ###UniswapV2ERC20###
 
+    def get_token_name(self,_token_address):
+        token_contract=self.web3.eth.contract(address=_token_address,abi=self.erc20_abi)
+        return token_contract.functions.name().call()
+    
+    def get_token_symbol(self,_token_address):
+        token_contract=self.web3.eth.contract(address=_token_address,abi=self.erc20_abi)
+        return token_contract.functions.symbol().call()
+
     def get_token_balance_of(self,_token_address,_owner_public_address):
         token_contract=self.web3.eth.contract(address=_token_address,abi=self.erc20_abi)
         return token_contract.functions.balanceOf(_owner_public_address).call()
