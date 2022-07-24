@@ -36,7 +36,7 @@ class UniswapV2:
         self.route_contract=self.web3.eth.contract(address=self.route_address,abi=self.route_abi)
 
 
-    def _sendTransaction(self, function, params,_owner_private_key):
+    def send_transaction(self, function, params,_owner_private_key):
         transaction = function.buildTransaction(params)
         signedTransaction=self.web3.eth.account.sign_transaction(transaction, private_key=_owner_private_key)
         return self.web3.eth.send_raw_transaction(signedTransaction.rawTransaction)
@@ -81,7 +81,7 @@ class UniswapV2:
             'nonce': self.nonce,
             'type': '0x2'
         }
-        response = self.sendTransaction(swapFunction,params,self.my_private_key)
+        response = self.send_transaction(swapFunction,params,self.my_private_key)
         return self.web3.toHex(response)
 
     def swapExactTokenForTokensWithGas(self,_amount_in,_amount_out_min,_path,_to,_deadline,_max_fee_per_gas,_max_priority_fee_per_gas,_gas):
@@ -96,7 +96,7 @@ class UniswapV2:
             'maxPriorityFeePerGas': _max_priority_fee_per_gas,
             'gas':_gas
         }
-        response = self.sendTransaction(swapFunction,params,self.my_private_key)
+        response = self.send_transaction(swapFunction,params,self.my_private_key)
         return self.web3.toHex(response)    
 
     def swapTokensForExactTokens(self,_amount_out,_amount_in_max,_path,_to,_deadline):
@@ -108,7 +108,7 @@ class UniswapV2:
             'nonce': self.nonce,
             'type': '0x2'
         }
-        response = self._sendTransaction(swapFunction,params,self.my_private_key)
+        response = self.send_transaction(swapFunction,params,self.my_private_key)
         return self.web3.toHex(response)
 
     def swapExactETHForTokens(self,_amount_out_min,_path,_to,_deadline):
@@ -120,7 +120,7 @@ class UniswapV2:
             'nonce': self.nonce,
             'type': '0x2'
         }
-        response = self._sendTransaction(swapFunction,params,self.my_private_key)
+        response = self.send_transaction(swapFunction,params,self.my_private_key)
         return self.web3.toHex(response)
 
     def swapTokensForExactETH(self,_amount_out,_amount_in_max,_path,_to,_deadline):
@@ -132,7 +132,7 @@ class UniswapV2:
             'nonce': self.nonce,
             'type': '0x2'
         }
-        response = self._sendTransaction(swapFunction,params,self.my_private_key)
+        response = self.send_transaction(swapFunction,params,self.my_private_key)
         return self.web3.toHex(response)
 
     def swapExactTokensForETH(self,_amount_in,_amount_out_min,_path,_to,_deadline):
@@ -144,7 +144,7 @@ class UniswapV2:
             'nonce': self.nonce,
             'type': '0x2'
         }
-        response = self._sendTransaction(swapFunction,params,self.my_private_key)
+        response = self.send_transaction(swapFunction,params,self.my_private_key)
         return self.web3.toHex(response)
 
     def swapETHForExactTokens(self,_amount_out,_path,_to,_deadline):
@@ -156,7 +156,7 @@ class UniswapV2:
             'nonce': self.nonce,
             'type': '0x2'
         }
-        response = self._sendTransaction(swapFunction,params,self.my_private_key)
+        response = self.send_transaction(swapFunction,params,self.my_private_key)
         return self.web3.toHex(response)
 
     ###IUniswapV2Router02###
