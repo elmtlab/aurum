@@ -73,7 +73,7 @@ class UniswapV2:
         return
 
     def swapExactTokensForTokens(self,_amount_in,_amount_out_min,_path,_to,_deadline):
-        self.nonce=self.web3.eth.get_transaction_count(self.my_public_address)
+        self.nonce=self.web3.eth.get_transaction_count(self.my_public_key)
         swapFunction=self.route_contract.functions.swapExactTokensForTokens(_amount_in, _amount_out_min, _path, _to, _deadline)
         params={
             'from': self.my_public_key,
@@ -85,7 +85,7 @@ class UniswapV2:
         return self.web3.toHex(response)
 
     def swapExactTokenForTokensWithGas(self,_amount_in,_amount_out_min,_path,_to,_deadline,_max_fee_per_gas,_max_priority_fee_per_gas,_gas):
-        self.nonce=self.web3.eth.get_transaction_count(self.my_public_address)
+        self.nonce=self.web3.eth.get_transaction_count(self.my_public_key)
         swapFunction=self.route_contract.functions.swapExactTokensForTokens(_amount_in, _amount_out_min, _path, _to, _deadline)
         params={
             'from': self.my_public_key,
@@ -100,7 +100,7 @@ class UniswapV2:
         return self.web3.toHex(response)    
 
     def swapTokensForExactTokens(self,_amount_out,_amount_in_max,_path,_to,_deadline):
-        self.nonce=self.web3.eth.get_transaction_count(self.my_public_address)
+        self.nonce=self.web3.eth.get_transaction_count(self.my_public_key)
         swapFunction=self.route_contract.functions.swapTokensForExactTokens(_amount_out,_amount_in_max, _path, _to, _deadline)
         params={
             'from': self.my_public_key,
@@ -112,7 +112,7 @@ class UniswapV2:
         return self.web3.toHex(response)
 
     def swapExactETHForTokens(self,_amount_out_min,_path,_to,_deadline):
-        self.nonce=self.web3.eth.get_transaction_count(self.my_public_address)
+        self.nonce=self.web3.eth.get_transaction_count(self.my_public_key)
         swapFunction=self.route_contract.functions.swapExactETHForTokens(_amount_out_min, _path, _to, _deadline)
         params={
             'from': self.my_public_key,
@@ -124,7 +124,7 @@ class UniswapV2:
         return self.web3.toHex(response)
 
     def swapTokensForExactETH(self,_amount_out,_amount_in_max,_path,_to,_deadline):
-        self.nonce=self.web3.eth.get_transaction_count(self.my_public_address)
+        self.nonce=self.web3.eth.get_transaction_count(self.my_public_key)
         swapFunction=self.route_contract.functions.swapTokensForExactETH(_amount_out,_amount_in_max, _path, _to, _deadline)
         params={
             'from': self.my_public_key,
@@ -136,7 +136,7 @@ class UniswapV2:
         return self.web3.toHex(response)
 
     def swapExactTokensForETH(self,_amount_in,_amount_out_min,_path,_to,_deadline):
-        self.nonce=self.web3.eth.get_transaction_count(self.my_public_address)
+        self.nonce=self.web3.eth.get_transaction_count(self.my_public_key)
         swapFunction=self.route_contract.functions.swapExactTokensForETH(_amount_in,_amount_out_min, _path, _to, _deadline)
         params={
             'from': self.my_public_key,
@@ -148,7 +148,7 @@ class UniswapV2:
         return self.web3.toHex(response)
 
     def swapETHForExactTokens(self,_amount_out,_path,_to,_deadline):
-        self.nonce=self.web3.eth.get_transaction_count(self.my_public_address)
+        self.nonce=self.web3.eth.get_transaction_count(self.my_public_key)
         swapFunction=self.route_contract.functions.swapETHForExactTokens(_amount_out, _path, _to, _deadline)
         params={
             'from': self.my_public_key,
